@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Tile : NetworkBehaviour
+public class Tile : MonoBehaviour
 {
-    public EventHandler Clicked;
+    public event EventHandler Clicked;
     private bool selected;
 
     [SerializeField] private SpriteRenderer sr;
@@ -26,9 +26,9 @@ public class Tile : NetworkBehaviour
         }
         if (isMouseHovering())
         {
-            sr.color = Color.red;
-            if (Input.GetMouseButton(0)) sr.color = Color.cyan;
-            if (Input.GetMouseButtonDown(0)) Clicked.Invoke(this, new EventArgs());
+            sr.color = Color.cyan;
+            if (Input.GetMouseButton(0)) sr.color = Color.green;
+            if (Input.GetMouseButtonDown(0)) Clicked?.Invoke(this, new EventArgs());
         }
         else sr.color = Color.white;
     }
